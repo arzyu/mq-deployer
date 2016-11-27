@@ -1,0 +1,29 @@
+{
+  "name": "mq-deployer",
+  "version": "0.0.1",
+  "description": "A message based automated deployment tool.",
+  "bin": {
+    "producer": "bin/producer",
+    "consumer": "bin/consumer"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-latest": "^6.14.0",
+    "babel-preset-stage-3": "^6.17.0",
+    "babel-wrapper": "^0.0.2",
+    "commander": "^2.9.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^6.1.2",
+    "eslint": "^3.5.0",
+    "eslint-config-shuyun": "github:shuyunff2e/eslint-config-shuyun"
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": "shuyun/nodejs",
+    "rules": {
+      "no-console": "off"
+    }
+  },
+  "license": "MIT"
+}
