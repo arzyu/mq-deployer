@@ -6,6 +6,10 @@
     "producer": "bin/producer",
     "consumer": "bin/consumer"
   },
+  "scripts": {
+    "producer": "./bin/producer",
+    "consumer": "./bin/consumer"
+  },
   "dependencies": {
     "babel-polyfill": "^6.16.0",
     "babel-preset-latest": "^6.14.0",
