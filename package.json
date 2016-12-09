@@ -16,19 +16,25 @@
     "babel-preset-latest": "^6.14.0",
     "babel-preset-stage-3": "^6.17.0",
     "babel-wrapper": "^0.0.2",
-    "commander": "^2.9.0"
+    "commander": "^2.9.0",
+    "get-stdin": "^5.0.1",
+    "node-uuid": "^1.4.7"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
     "eslint": "^3.5.0",
-    "eslint-config-shuyun": "github:shuyunff2e/eslint-config-shuyun"
+    "eslint-config-presets": "github:arzyu/eslint-config-presets"
   },
   "eslintConfig": {
     "parser": "babel-eslint",
-    "extends": "shuyun/nodejs",
+    "extends": "presets/nodejs",
     "rules": {
       "no-console": "off"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arzyu/mq-deployer"
   },
   "license": "MIT"
 }
