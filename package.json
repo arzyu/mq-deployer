@@ -19,7 +19,7 @@
     "babel-wrapper": "^0.0.2",
     "commander": "^2.9.0",
     "get-stdin": "^5.0.1",
-    "node-uuid": "^1.4.7"
+    "uuid": "^3.0.1"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
