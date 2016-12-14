@@ -1,0 +1,12 @@
+apps:
+  - name: mq-deployer
+    script: ./bin/consumer
+    args: >
+      --uri amqp://user:password@ip:port/%2F
+      --exchange test
+      --router test.*.develop
+      --destination ./www
+    watch: true
+    exec_mode: cluster
+    instances: 2
+

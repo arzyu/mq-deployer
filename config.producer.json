@@ -1,4 +1,0 @@
-{
-  "uri": "amqp://user:password@ip:port/%2F",
-  "exchange": "test"
-}
