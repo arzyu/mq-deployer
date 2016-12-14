@@ -9,4 +9,6 @@ apps:
     watch: true
     exec_mode: cluster
     instances: 2
+    merge_logs: true
+    log_date_format: YYYY-MM-DD HH:mm Z
 
