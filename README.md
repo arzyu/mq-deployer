@@ -5,6 +5,10 @@
 ## 运行消息监听服务 & 发送消息
 
 ```bash
+## clone 这个项目后，需要安装依赖
+cd mq-deployer
+npm install
+
 ## 使用 pm2 启动自动分发程序（consumer）
 ## 需要注意 process.yml 中参数的配置
 pm2 start process.yml
