@@ -15,11 +15,6 @@ indent_size = 4
 indent_style = space
 indent_size = 2
 
-[.babelrc]
-indent_style = space
-indent_size = 2
-
 [*.{json,yml}]
 indent_style = space
 indent_size = 2
-

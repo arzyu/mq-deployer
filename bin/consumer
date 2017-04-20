@@ -1,5 +1,0 @@
-#!/usr/bin/env node
-
-require('babel-polyfill');
-require('babel-wrapper')('../lib/consumer', { only: /mq-deployer\/lib/ });
-

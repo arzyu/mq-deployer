@@ -1,0 +1,12 @@
+# mq-deployer consumer config
+
+uri: amqp://user:pass@host:port/%2F
+exchange: test
+tasks:
+  - name: project-a
+    destination: /path/to/webroot
+    router: com.project-a
+
+  - name: project-b
+    destination: /path/to/webroot
+    router: com.project-b
