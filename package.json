@@ -1,6 +1,6 @@
 {
   "name": "mq-deployer",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "bin": "bin/mq-deployer.js",
   "scripts": {
     "start": "node -r babel-register -r babel-polyfill ./bin/mq-deployer.js"
