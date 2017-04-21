@@ -37,6 +37,7 @@ const deploy = pack => new Promise((resolve, reject) => {
   const extractPath = path.resolve(pack.destination, uuid.v4());
 
   const customReject = (error) => {
+    console.log(error);
     fs.removeSync(extractPath);
     reject(error);
   };
@@ -46,7 +47,11 @@ const deploy = pack => new Promise((resolve, reject) => {
 
   fs.ensureDirSync(extractPath);
 
-  request.get(pack.url)
+  request.get(pack.url, (error) => {
+    if (error) {
+      customReject(error);
+    }
+  })
     .pipe(
       zlib.createGunzip()
         .on('error', (error) => {
@@ -128,7 +133,7 @@ async function start(config) {
       }).catch((error) => {
         console.log(`\n[${queue}]:\n Task failed.`);
         replyToQueue(replyTo, correlationId, {
-          queue, state: 'ERROR', message: error.stack
+          queue, state: 'ERROR', message: `${error.message}\n${error.stack}`
         });
       });
     }, { noAck: true });
