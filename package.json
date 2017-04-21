@@ -7,18 +7,22 @@
     "README.md"
   ],
   "scripts": {
-    "build": "node -r babel-register -r babel-polyfill ./scripts/build.js",
+    "build": "node -r babel-register ./scripts/build.js",
     "prepublish": "npm run build",
-    "start": "node -r babel-register -r babel-polyfill ./src/mq-deployer.js"
+    "start": "node -r babel-register ./src/mq-deployer.js"
   },
   "babel": {
     "presets": [
       "env"
+    ],
+    "plugins": [
+      "transform-runtime"
     ]
   },
   "dependencies": {
     "address": "^1.0.1",
     "amqplib": "^0.5.1",
+    "babel-runtime": "^6.23.0",
     "commander": "^2.9.0",
     "fs-extra": "^2.1.2",
     "js-yaml": "^3.8.3",
@@ -29,7 +33,7 @@
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.2",
-    "babel-polyfill": "^6.23.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.4.0",
     "babel-register": "^6.24.1",
     "eslint": "^3.19.0",
