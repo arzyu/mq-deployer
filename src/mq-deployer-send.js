@@ -105,6 +105,12 @@ async function send(message, config) {
       replyTo: rpcReplyQueue.queue
     }
   );
+
+  setTimeout(() => {
+    console.log('[producer]: No running consumer. Exit.');
+    connection.close();
+    process.exit(1);
+  }, 20000);
 }
 
 send(messageText, {
