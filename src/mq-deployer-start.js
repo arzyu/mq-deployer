@@ -33,6 +33,7 @@ const getAddressInfo = () => new Promise((resolve, reject) => {
   });
 });
 
+// 下载部署包
 const deploy = pack => new Promise((resolve, reject) => {
   const extractPath = path.resolve(pack.destination, uuid.v4());
 
@@ -47,22 +48,14 @@ const deploy = pack => new Promise((resolve, reject) => {
 
   fs.ensureDirSync(extractPath);
 
-  request.get(pack.url, (error) => {
-    if (error) {
-      customReject(error);
-    }
-  })
+  request.get(pack.url, error => error && customReject(error))
     .pipe(
-      zlib.createGunzip()
-        .on('error', (error) => {
-          customReject(error);
-        })
+      zlib.createGunzip().on('error', error => customReject(error))
     )
     .pipe(
-      tar.Extract({ path: extractPath, strip: 1}) // eslint-disable-line
-        .on('error', (error) => {
-          customReject(error);
-        })
+      // eslint-disable-next-line
+      tar.Extract({ path: extractPath, strip: 1})
+        .on('error', error => customReject(error))
     )
     .on('finish', () => {
       fs.moveSync(
@@ -72,9 +65,7 @@ const deploy = pack => new Promise((resolve, reject) => {
       );
       resolve();
     })
-    .on('error', (error) => {
-      customReject(error);
-    });
+    .on('error', error => customReject(error));
 });
 
 async function start(config) {
