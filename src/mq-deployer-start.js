@@ -43,8 +43,11 @@ const deploy = pack => new Promise((resolve, reject) => {
     reject(error);
   };
 
-  process.on('exit', () => customReject('exit'));
-  process.on('SIGINT', () => customReject('SIGINT'));
+  const exitListener = () => customReject('exit');
+  const SIGINTListener = () => customReject('SIGINT');
+
+  process.on('exit', exitListener);
+  process.on('SIGINT', SIGINTListener);
 
   fs.ensureDirSync(extractPath);
 
@@ -63,6 +66,8 @@ const deploy = pack => new Promise((resolve, reject) => {
         path.resolve(pack.destination, pack.name),
         { overwrite: true }
       );
+      process.removeListener('exit', exitListener);
+      process.removeListener('SIGINT', SIGINTListener);
       resolve();
     })
     .on('error', error => customReject(error));
