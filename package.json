@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "build": "node -r babel-register -r babel-polyfill ./scripts/build.js",
+    "prepublish": "npm run build",
     "start": "node -r babel-register -r babel-polyfill ./bin/mq-deployer.js"
   },
   "babel": {
