@@ -39,16 +39,14 @@ const deploy = pack => new Promise((resolve, reject) => {
   const extractPath = path.resolve(pack.destination, uuid.v4());
 
   const customReject = (error) => {
-    console.log(error);
+    console.log(`\nDeployment terminated: ${error}`);
     fs.removeSync(extractPath);
     reject(error);
   };
 
   const exitListener = () => customReject('exit');
-  const SIGINTListener = () => customReject('SIGINT');
 
-  process.on('exit', exitListener);
-  process.on('SIGINT', SIGINTListener);
+  process.prependListener('exit', exitListener);
 
   fs.ensureDirSync(extractPath);
 
@@ -68,7 +66,6 @@ const deploy = pack => new Promise((resolve, reject) => {
         { overwrite: true }
       );
       process.removeListener('exit', exitListener);
-      process.removeListener('SIGINT', SIGINTListener);
       resolve();
     })
     .on('error', error => customReject(error));
@@ -95,12 +92,17 @@ async function start(config) {
     process.exit(1);
   });
 
-  process.on('SIGINT', () => connection.close());
+  process.prependOnceListener('exit', () => {
+    console.log('\nConnection closed.');
+    connection.close();
+  });
+
+  console.log('Create consumer queue(s):');
 
   tasks.forEach(async (task) => {
     const queue = `${exchange}>${task.router}<>${addressInfo.ip}:${uuid.v4()}`;
 
-    console.log(`\n[${queue}]:\n Queue created.`);
+    console.log(` ${queue}`);
 
     await channel.assertQueue(queue, { durable: false, autoDelete: true });
     await channel.bindQueue(queue, exchange, task.router);
@@ -145,6 +147,10 @@ process.on('unhandledRejection', (error) => {
 process.on('uncaughtException', (error) => {
   console.log(error.stack);
   process.exit(1);
+});
+
+process.on('SIGINT', () => {
+  process.exit();
 });
 
 start(yamlConfig);
