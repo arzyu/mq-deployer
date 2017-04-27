@@ -1,10 +1,13 @@
 {
   "name": "mq-deployer",
   "version": "2.0.4",
-  "bin": "dist/mq-deployer.js",
+  "bin": {
+    "mq-deployer": "dist/mq-deployer.js",
+    "mq-deployer-start": "dist/mq-deployer-start.js",
+    "mq-deployer-send": "dist/mq-deployer-send.js"
+  },
   "files": [
-    "dist",
-    "README.md"
+    "dist"
   ],
   "scripts": {
     "build": "node -r babel-register ./scripts/build.js",

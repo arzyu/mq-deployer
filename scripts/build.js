@@ -1,10 +1,23 @@
 import shell from 'shelljs';
 
+const src = './bin';
+const dest = './dist';
+
+function generateBuildCmds() {
+  const buildCmds = [];
+  shell.ls(src).forEach((file) => {
+    buildCmds.push(
+      ['exec', `./node_modules/.bin/babel ${src}/${file} -o ${dest}/${file}`],
+      ['chmod', '755', `${dest}/${file}`]
+    );
+  });
+  return buildCmds;
+}
+
 const commands = [
-  ['rm', '-rf', './dist'],
-  ['mkdir', '-p', './dist'],
-  ['exec', './node_modules/.bin/babel --out-dir ./dist ./bin'],
-  ['chmod', '755', './dist/mq-deployer.js']
+  ['rm', '-rf', dest],
+  ['mkdir', '-p', dest],
+  ...generateBuildCmds()
 ];
 
 commands.forEach((cmd) => {
