@@ -949,8 +949,8 @@ escope@^3.6.0:
     estraverse "^4.1.1"
 
 eslint-config-presets@arzyu/eslint-config-presets:
-  version "0.18.2"
-  resolved "https://codeload.github.com/arzyu/eslint-config-presets/tar.gz/1a9413333d5d8c7a877cb9b551bad6bcbf3e2999"
+  version "1.0.0"
+  resolved "https://codeload.github.com/arzyu/eslint-config-presets/tar.gz/11da87aac5a59d1ac9503855b4be4ce08d565fef"
 
 eslint@^3.19.0:
   version "3.19.0"
