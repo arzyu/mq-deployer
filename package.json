@@ -9,7 +9,7 @@
   "scripts": {
     "build": "node -r babel-register ./scripts/build.js",
     "prepublish": "npm run build",
-    "start": "node -r babel-register ./src/mq-deployer.js"
+    "start": "node -r babel-register ./bin/mq-deployer.js"
   },
   "babel": {
     "presets": [
