@@ -1,6 +1,6 @@
 {
   "name": "mq-deployer",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "bin": {
     "mq-deployer": "dist/mq-deployer.js",
     "mq-deployer-start": "dist/mq-deployer-start.js",
