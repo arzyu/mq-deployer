@@ -50,23 +50,27 @@ async function send(message, config) {
     switch (response.state) {
     case 'ACK':
       consumers.add(worker);
-      setTimeout(() => reject(new Error('Timeout.')), 600000);
+
+      // consumer 响应后清除 1st/2nd timer，并重新开启 2nd timer
+      clearTimeout(consumerTimer);
+      consumerTimer = setTimeout(() => reject(new Error('Timeout.')), 600000);
       break;
     case 'DONE':
       consumers.delete(worker);
+
+      // 当有所有 consumer 完成部署后，清除 2nd/3rd timer，再等待最后 10s
       if (!consumers.size) {
-        if (!consumerTimer) {
-          process.stdout.write('\n[producer]: Waiting for 10s ...');
-          consumerTimer = setTimeout(
-            () => {
-              if (!consumers.size) {
-                process.stdout.write(' done!\n');
-                resolve();
-              }
-            },
-            10000
-          );
-        }
+        clearTimeout(consumerTimer);
+        process.stdout.write('\n[producer]: Waiting for 10s ...');
+        consumerTimer = setTimeout(
+          () => {
+            if (!consumers.size) {
+              process.stdout.write(' done!\n');
+              resolve();
+            }
+          },
+          10000
+        );
       }
       break;
     case 'ERROR':
@@ -107,7 +111,8 @@ async function send(message, config) {
     }
   );
 
-  setTimeout(() => {
+  // 1st timer
+  consumerTimer = setTimeout(() => {
     console.log('[producer]: No running consumer. Exit.');
     connection.close();
     process.exit(1);
