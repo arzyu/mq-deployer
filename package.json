@@ -12,7 +12,7 @@
   "scripts": {
     "lint": "eslint .",
     "build": "node -r babel-register ./scripts/build.js",
-    "prepublish": "npm run build",
+    "prepublish": "npm run lint && npm run build",
     "start": "node -r babel-register ./bin/mq-deployer.js"
   },
   "babel": {
